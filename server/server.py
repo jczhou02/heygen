@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import time
 import threading
+import random
 
 app = Flask(__name__)
 status = {'result': 'pending'}
@@ -17,6 +18,10 @@ def sim_status(delay):
         status['result'] = 'completed'
     completed_time = time.time()
 
+@app.route('/')
+def home():
+    return 'Weclome to the translation server!'
+
 @app.route('/status', methods=['GET'])
 def get_status():
     return jsonify(status)
@@ -25,6 +30,12 @@ def get_status():
 def start():
     global status
     global completed_time
+
+    print("Incoming request data: ", request.json)
+    print("Incoming JSON: ", request.json)
+    if not request.json:
+        return jsonify({'error': 'Invald JSON payload'}), 400
+
     status['result'] = 'pending'
     completed_time = None
     delay = request.json.get('delay', 10)   #  default delay is 10 seconds

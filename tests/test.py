@@ -8,8 +8,10 @@ def test_client():
     time.sleep(2)
     
     try:
-        requests.post('http://localhost:5000/start', json={'delay': 5})
-        client = Client('http://localhost:5000')
+        response = requests.post('http://127.0.0.1:5000/start', json={'delay': 5})
+        print('Start response:', response.json())
+
+        client = Client('http://127.0.0.1:5000')
         result = client.poll_status()
         print(f'Final result: {result}')
     finally:
