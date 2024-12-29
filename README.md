@@ -37,7 +37,15 @@ To fix this, you can either:
 Increase the max_retries in your test to account for longer server delays.
 Adjust the init_delay and max_delay values to cover the server delay while keeping retries reasonable.
 
+--- 
+### Final Thoughts
+This server-client library service banks on exponential backoff to ensure the backend does not overwhelm the server with requests.  <br>
+#### Scalability: 
+multiple translation jobs can be run simultaneously, as our client library abstracts the status polling process <br>
+#### Customer-Design:
+users can be notified promptly when their video is ready or if issues occur.
 
+---
 
 
 
