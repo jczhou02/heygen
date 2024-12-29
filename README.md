@@ -29,8 +29,8 @@ I used pytest approach: <br>
 ### Debug Testing
 #### Server Delay:
 Your server takes 5 or 10 seconds to transition from pending to completed/error.
-The client library only retries max_retries=3, which may not cover the time required for the server to transition to a final state.
-Client Configuration:
+If for instance, the client library only retries max_retries=3, this may not cover the time required for the server to transition to a final state. <br>
+Client Configuration: <br>
 With init_delay=1 and exponential backoff (delay *= 2), the retry intervals are: 1s, 2s, 4s, for a total of 7 seconds before exhausting retries. This isn’t enough time for the server to complete its transition for delays like 5 or 10.
 #### Solution
 To fix this, you can either:
